@@ -10,13 +10,13 @@ import java.util.ArrayList;
 public class SpaDayController {
 
     public boolean checkSkinType(String skinType, String facialType) {
-        if (skinType.equals("oily")) {
+        if(skinType.equals("oily")) {
             return facialType.equals("Microdermabrasion") || facialType.equals("Rejuvenating");
         }
-        else if (skinType.equals("combination")) {
+        else if(skinType.equals("combination")) {
             return facialType.equals("Microdermabrasion") || facialType.equals("Rejuvenating") || facialType.equals("Enzyme Peel");
         }
-        else if (skinType.equals("dry")) {
+        else if(skinType.equals("dry")) {
             return facialType.equals("Rejuvenating") || facialType.equals("Hydrofacial");
         }
         else {
@@ -57,11 +57,16 @@ public class SpaDayController {
         facials.add("Enzyme Peel");
 
         ArrayList<String> appropriateFacials = new ArrayList<>();
-        for (int i = 0; i < facials.size(); i ++) {
+        for(int i = 0; i < facials.size(); i ++) {
             if (checkSkinType(skintype,facials.get(i))) {
                 appropriateFacials.add(facials.get(i));
             }
         }
+
+        model.addAttribute("name", name);
+        model.addAttribute("skintype", skintype);
+        model.addAttribute("manipedi", manipedi);
+        model.addAttribute("appropriateFacials", appropriateFacials);
 
         return "menu";
     }

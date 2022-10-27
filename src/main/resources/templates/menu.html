@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8" />
     <title>Spa Menu</title>
     <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <body>
+
 <h1>My Super Fancy Spa</h1>
+
 <div id = "clientProfile">
+    <h2>My profile</h2>
+        <p th:text="${name}"></p>
+        <p th:text="${skintype}">Skin type</p>
+        <p th:text="${manipedi}">Manicure or Pedicure</p>
 </div>
 <div id = "servicesMenu">
+    <h2>Available Services</h2>
+    <div>
+        <h3>Facial Treatments</h3>
+        <p>These are your recommendations based on your profile.</p>
+        <table>
+            <th:block th:each="facial : ${appropriateFacials}">
+                <tr>
+                    <td th:text="${facial}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <div>
+        <th:block th:if="${manipedi.equals('manicure')}">
+            <h3>Manicure</h3>
+            <p th:replace="fragments :: manicureDescription">Manicure description.</p>
+        </th:block>
+        <th:block th:unless="${manipedi.equals('manicure')}">
+            <h3>Pedicure</h3>
+            <p th:replace="fragments :: pedicureDescription">Pedicure description.</p>
+        </th:block>
+    </div>
 </div>
+
 </body>
 </html>
